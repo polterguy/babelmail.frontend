@@ -20,7 +20,7 @@
             appearance="outline"
             class="fill-width filter-textbox"
           >
-            <mat-label>{{ 'id' | translate }}</mat-label>
+            <mat-label>{{ 'Id' | translate }}</mat-label>
             <input matInput type="text" autocomplete="off" [formControl]="id" />
             <mat-icon matSuffix>search</mat-icon>
           </mat-form-field>
@@ -39,7 +39,7 @@
             appearance="outline"
             class="fill-width filter-textbox"
           >
-            <mat-label>{{ 'created' | translate }}</mat-label>
+            <mat-label>{{ 'Created' | translate }}</mat-label>
             <input
               matInput
               type="text"
@@ -53,7 +53,7 @@
           </button>
         </th>
         <td mat-cell (click)="toggleDetails(el)" *matCellDef="let el">
-          {{ el['created'] }}
+          {{ el['created'] | formatDate }}
         </td>
       </ng-container>
 
@@ -63,7 +63,7 @@
             appearance="outline"
             class="fill-width filter-textbox"
           >
-            <mat-label>{{ 'content' | translate }}</mat-label>
+            <mat-label>{{ 'Content' | translate }}</mat-label>
             <input
               matInput
               type="text"
@@ -130,15 +130,15 @@
               <mat-icon matSuffix>edit</mat-icon>
             </button>
             <p class="details">
-              <label>{{ 'id' | translate }}</label>
+              <label>{{ 'Id' | translate }}</label>
               <span>{{ el['id'] }}</span>
             </p>
             <p class="details">
-              <label>{{ 'created' | translate }}</label>
-              <span>{{ el['created'] }}</span>
+              <label>{{ 'Created' | translate }}</label>
+              <span>{{ el['created'] | formatDate }}</span>
             </p>
             <p class="details">
-              <label>{{ 'content' | translate }}</label>
+              <label>{{ 'Content' | translate }}</label>
               <span>{{ el['content'] }}</span>
             </p>
           </div>
