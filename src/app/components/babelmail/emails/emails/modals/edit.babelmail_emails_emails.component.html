@@ -1,0 +1,151 @@
+<h1 mat-dialog-title>
+  {{ (data.isEdit ? 'Edit' : 'Create') | translate }} {{ 'Emails' | translate }}
+</h1>
+<div mat-dialog-content>
+  <mat-form-field
+    *ngIf="canEditColumn('to_name')"
+    class="entity-edit-field"
+    appearance="outline"
+  >
+    <mat-label>{{ 'to_name' | translate }}</mat-label>
+    <input
+      matInput
+      type="text"
+      (change)="changed('to_name')"
+      [(ngModel)]="data.entity.to_name"
+      autocomplete="off"
+    />
+  </mat-form-field>
+
+  <mat-form-field
+    *ngIf="canEditColumn('from_name')"
+    class="entity-edit-field"
+    appearance="outline"
+  >
+    <mat-label>{{ 'from_name' | translate }}</mat-label>
+    <input
+      matInput
+      type="text"
+      (change)="changed('from_name')"
+      [(ngModel)]="data.entity.from_name"
+      autocomplete="off"
+    />
+  </mat-form-field>
+
+  <mat-form-field
+    *ngIf="canEditColumn('to_email')"
+    class="entity-edit-field"
+    appearance="outline"
+  >
+    <mat-label>{{ 'to_email' | translate }}</mat-label>
+    <input
+      matInput
+      type="text"
+      (change)="changed('to_email')"
+      [(ngModel)]="data.entity.to_email"
+      autocomplete="off"
+    />
+  </mat-form-field>
+
+  <mat-form-field
+    *ngIf="canEditColumn('from_email')"
+    class="entity-edit-field"
+    appearance="outline"
+  >
+    <mat-label>{{ 'from_email' | translate }}</mat-label>
+    <input
+      matInput
+      type="text"
+      (change)="changed('from_email')"
+      [(ngModel)]="data.entity.from_email"
+      autocomplete="off"
+    />
+  </mat-form-field>
+
+  <mat-form-field
+    *ngIf="canEditColumn('subject')"
+    class="entity-edit-field"
+    appearance="outline"
+  >
+    <mat-label>{{ 'subject' | translate }}</mat-label>
+    <input
+      matInput
+      type="text"
+      (change)="changed('subject')"
+      [(ngModel)]="data.entity.subject"
+      autocomplete="off"
+    />
+  </mat-form-field>
+
+  <mat-form-field
+    *ngIf="canEditColumn('content')"
+    class="entity-edit-field"
+    appearance="outline"
+  >
+    <mat-label>{{ 'content' | translate }}</mat-label>
+    <input
+      matInput
+      type="text"
+      (change)="changed('content')"
+      [(ngModel)]="data.entity.content"
+      autocomplete="off"
+    />
+  </mat-form-field>
+
+  <mat-form-field
+    *ngIf="canEditColumn('language')"
+    class="entity-edit-field"
+    appearance="outline"
+  >
+    <mat-label>{{ 'language' | translate }}</mat-label>
+    <input
+      matInput
+      type="text"
+      (change)="changed('language')"
+      [(ngModel)]="data.entity.language"
+      autocomplete="off"
+    />
+  </mat-form-field>
+
+  <mat-form-field
+    *ngIf="canEditColumn('id')"
+    class="entity-edit-field"
+    appearance="outline"
+  >
+    <mat-label>{{ 'id' | translate }}</mat-label>
+    <input
+      matInput
+      type="number"
+      step="1"
+      (change)="changed('id')"
+      [(ngModel)]="data.entity.id"
+      autocomplete="off"
+    />
+  </mat-form-field>
+
+  <mat-checkbox
+    *ngIf="canEditColumn('send')"
+    class="entity-edit-field"
+    (change)="changed('send')"
+    [(ngModel)]="data.entity.send"
+    >send</mat-checkbox
+  >
+
+  <mat-checkbox
+    *ngIf="canEditColumn('html')"
+    class="entity-edit-field"
+    (change)="changed('html')"
+    [(ngModel)]="data.entity.html"
+    >html</mat-checkbox
+  >
+</div>
+
+<div mat-dialog-actions>
+  <div class="right-aligned">
+    <button mat-raised-button color="primary" (click)="upsert()">
+      {{ 'Save' | translate }}
+    </button>
+
+    <button mat-button (click)="close(null)">{{ 'Cancel' | translate }}</button>
+  </div>
+</div>
