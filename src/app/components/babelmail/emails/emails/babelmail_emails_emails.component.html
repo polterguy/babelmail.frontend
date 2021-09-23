@@ -20,7 +20,7 @@
             appearance="outline"
             class="fill-width filter-textbox"
           >
-            <mat-label>{{ 'to_name' | translate }}</mat-label>
+            <mat-label>{{ 'To name' | translate }}</mat-label>
             <input
               matInput
               type="text"
@@ -44,7 +44,7 @@
             appearance="outline"
             class="fill-width filter-textbox"
           >
-            <mat-label>{{ 'from_name' | translate }}</mat-label>
+            <mat-label>{{ 'From name' | translate }}</mat-label>
             <input
               matInput
               type="text"
@@ -68,7 +68,7 @@
             appearance="outline"
             class="fill-width filter-textbox"
           >
-            <mat-label>{{ 'to_email' | translate }}</mat-label>
+            <mat-label>{{ 'To email' | translate }}</mat-label>
             <input
               matInput
               type="text"
@@ -92,7 +92,7 @@
             appearance="outline"
             class="fill-width filter-textbox"
           >
-            <mat-label>{{ 'from_email' | translate }}</mat-label>
+            <mat-label>{{ 'From email' | translate }}</mat-label>
             <input
               matInput
               type="text"
@@ -116,7 +116,7 @@
             appearance="outline"
             class="fill-width filter-textbox"
           >
-            <mat-label>{{ 'subject' | translate }}</mat-label>
+            <mat-label>{{ 'Subject' | translate }}</mat-label>
             <input
               matInput
               type="text"
@@ -140,7 +140,7 @@
             appearance="outline"
             class="fill-width filter-textbox"
           >
-            <mat-label>{{ 'language' | translate }}</mat-label>
+            <mat-label>{{ 'Language' | translate }}</mat-label>
             <input
               matInput
               type="text"
@@ -164,7 +164,7 @@
             appearance="outline"
             class="fill-width filter-textbox"
           >
-            <mat-label>{{ 'state' | translate }}</mat-label>
+            <mat-label>{{ 'State' | translate }}</mat-label>
             <input
               matInput
               type="text"
@@ -188,7 +188,7 @@
             appearance="outline"
             class="fill-width filter-textbox"
           >
-            <mat-label>{{ 'direction' | translate }}</mat-label>
+            <mat-label>{{ 'Direction' | translate }}</mat-label>
             <input
               matInput
               type="text"
@@ -212,7 +212,7 @@
             appearance="outline"
             class="fill-width filter-textbox"
           >
-            <mat-label>{{ 'id' | translate }}</mat-label>
+            <mat-label>{{ 'Id' | translate }}</mat-label>
             <input
               matInput
               type="number"
@@ -236,7 +236,7 @@
             appearance="outline"
             class="fill-width filter-textbox"
           >
-            <mat-label>{{ 'content' | translate }}</mat-label>
+            <mat-label>{{ 'Content' | translate }}</mat-label>
             <input
               matInput
               type="text"
@@ -260,7 +260,7 @@
             appearance="outline"
             class="fill-width filter-textbox"
           >
-            <mat-label>{{ 'created' | translate }}</mat-label>
+            <mat-label>{{ 'Created' | translate }}</mat-label>
             <input
               matInput
               type="text"
@@ -284,7 +284,7 @@
             appearance="outline"
             class="fill-width filter-textbox"
           >
-            <mat-label>{{ 'sent' | translate }}</mat-label>
+            <mat-label>{{ 'Sent' | translate }}</mat-label>
             <input
               matInput
               type="text"
@@ -351,51 +351,51 @@
               <mat-icon matSuffix>edit</mat-icon>
             </button>
             <p class="details">
-              <label>{{ 'to_name' | translate }}</label>
+              <label>{{ 'To name' | translate }}</label>
               <span>{{ el['to_name'] }}</span>
             </p>
             <p class="details">
-              <label>{{ 'from_name' | translate }}</label>
+              <label>{{ 'From name' | translate }}</label>
               <span>{{ el['from_name'] }}</span>
             </p>
             <p class="details">
-              <label>{{ 'to_email' | translate }}</label>
+              <label>{{ 'To email' | translate }}</label>
               <span>{{ el['to_email'] }}</span>
             </p>
             <p class="details">
-              <label>{{ 'from_email' | translate }}</label>
+              <label>{{ 'From email' | translate }}</label>
               <span>{{ el['from_email'] }}</span>
             </p>
             <p class="details">
-              <label>{{ 'subject' | translate }}</label>
+              <label>{{ 'Subject' | translate }}</label>
               <span>{{ el['subject'] }}</span>
             </p>
             <p class="details">
-              <label>{{ 'language' | translate }}</label>
+              <label>{{ 'Language' | translate }}</label>
               <span>{{ el['language'] }}</span>
             </p>
             <p class="details">
-              <label>{{ 'state' | translate }}</label>
+              <label>{{ 'State' | translate }}</label>
               <span>{{ el['state'] }}</span>
             </p>
             <p class="details">
-              <label>{{ 'direction' | translate }}</label>
+              <label>{{ 'Direction' | translate }}</label>
               <span>{{ el['direction'] }}</span>
             </p>
             <p class="details">
-              <label>{{ 'id' | translate }}</label>
+              <label>{{ 'Id' | translate }}</label>
               <span>{{ el['id'] }}</span>
             </p>
             <p class="details">
-              <label>{{ 'content' | translate }}</label>
+              <label>{{ 'Content' | translate }}</label>
               <span>{{ el['content'] }}</span>
             </p>
             <p class="details">
-              <label>{{ 'created' | translate }}</label>
+              <label>{{ 'Created' | translate }}</label>
               <span>{{ el['created'] }}</span>
             </p>
             <p class="details">
-              <label>{{ 'sent' | translate }}</label>
+              <label>{{ 'Sent' | translate }}</label>
               <span>{{ el['sent'] }}</span>
             </p>
           </div>
@@ -416,6 +416,7 @@
         *matRowDef="let row; columns: ['details']"
       ></tr>
     </table>
+
     <mat-paginator
       #paginator
       [(length)]="itemsCount"
