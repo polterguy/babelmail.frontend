@@ -1,22 +1,7 @@
 <h1 mat-dialog-title>
-  {{ (data.isEdit ? 'Edit' : 'Create') | translate }} {{ 'Emails' | translate }}
+  {{ (data.isEdit ? 'Edit' : 'Create') | translate }} {{ 'email' | translate }}
 </h1>
 <div mat-dialog-content>
-  <mat-form-field
-    *ngIf="canEditColumn('to_name')"
-    class="entity-edit-field"
-    appearance="outline"
-  >
-    <mat-label>{{ 'To name' | translate }}</mat-label>
-    <input
-      matInput
-      type="text"
-      (change)="changed('to_name')"
-      [(ngModel)]="data.entity.to_name"
-      autocomplete="off"
-    />
-  </mat-form-field>
-
   <mat-form-field
     *ngIf="canEditColumn('from_name')"
     class="entity-edit-field"
@@ -33,21 +18,6 @@
   </mat-form-field>
 
   <mat-form-field
-    *ngIf="canEditColumn('to_email')"
-    class="entity-edit-field"
-    appearance="outline"
-  >
-    <mat-label>{{ 'To email' | translate }}</mat-label>
-    <input
-      matInput
-      type="text"
-      (change)="changed('to_email')"
-      [(ngModel)]="data.entity.to_email"
-      autocomplete="off"
-    />
-  </mat-form-field>
-
-  <mat-form-field
     *ngIf="canEditColumn('from_email')"
     class="entity-edit-field"
     appearance="outline"
@@ -58,6 +28,36 @@
       type="text"
       (change)="changed('from_email')"
       [(ngModel)]="data.entity.from_email"
+      autocomplete="off"
+    />
+  </mat-form-field>
+
+  <mat-form-field
+    *ngIf="canEditColumn('to_name')"
+    class="entity-edit-field"
+    appearance="outline"
+  >
+    <mat-label>{{ 'To name' | translate }}</mat-label>
+    <input
+      matInput
+      type="text"
+      (change)="changed('to_name')"
+      [(ngModel)]="data.entity.to_name"
+      autocomplete="off"
+    />
+  </mat-form-field>
+
+  <mat-form-field
+    *ngIf="canEditColumn('to_email')"
+    class="entity-edit-field"
+    appearance="outline"
+  >
+    <mat-label>{{ 'To email' | translate }}</mat-label>
+    <input
+      matInput
+      type="text"
+      (change)="changed('to_email')"
+      [(ngModel)]="data.entity.to_email"
       autocomplete="off"
     />
   </mat-form-field>

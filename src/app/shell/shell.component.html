@@ -47,21 +47,6 @@
           <a
             *ngIf="
               authService.me.canInvoke(
-                'magic/modules/babelmail/attachments/attachments',
-                'get'
-              )
-            "
-            mat-list-item
-            routerLink="crud/babelmail/attachments/attachments"
-            routerLinkActive="active"
-            (click)="isMobile && sidenav.close()"
-          >
-            <span translate>Attachments</span>
-          </a>
-          <mat-divider></mat-divider>
-          <a
-            *ngIf="
-              authService.me.canInvoke(
                 'magic/modules/babelmail/emails/emails',
                 'get'
               )
@@ -72,6 +57,21 @@
             (click)="isMobile && sidenav.close()"
           >
             <span translate>Emails</span>
+          </a>
+          <mat-divider></mat-divider>
+          <a
+            *ngIf="
+              authService.me.canInvoke(
+                'magic/modules/babelmail/attachments/attachments',
+                'get'
+              )
+            "
+            mat-list-item
+            routerLink="crud/babelmail/attachments/attachments"
+            routerLinkActive="active"
+            (click)="isMobile && sidenav.close()"
+          >
+            <span translate>Attachments</span>
           </a>
           <mat-divider></mat-divider>
           <a

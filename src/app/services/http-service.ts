@@ -252,6 +252,22 @@ export class HttpService {
   }
 
   /**
+   * Allows caller to retrieve settings from backend.
+   */
+  get settings() {
+    return {
+      /**
+       * Returns default from name/email from backend.
+       */
+      default_from: () => {
+        return this.httpClient.get<any>(
+          environment.apiUrl + 'magic/modules/babelmail/settings/default-from'
+        );
+      },
+    };
+  }
+
+  /**
    * Uploads an image to your backend.
    *
    * @param url Backend relative endpoint URL
