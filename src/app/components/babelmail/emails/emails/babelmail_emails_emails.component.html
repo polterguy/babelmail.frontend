@@ -341,7 +341,7 @@
             *ngIf="shouldDisplayDetails(el)"
           >
             <div class="created" [matTooltip]="el.created | formatDate">
-              {{ el.created | since }}
+              {{ el.sent || el.created | since }}
             </div>
             <button
               *ngIf="
