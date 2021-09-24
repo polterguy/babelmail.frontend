@@ -1,6 +1,7 @@
 <h1 mat-dialog-title>
   {{ (data.isEdit ? 'Edit' : 'Create') | translate }} {{ 'email' | translate }}
 </h1>
+
 <div mat-dialog-content>
   <mat-form-field
     *ngIf="canEditColumn('from_name') && advanced"
@@ -34,7 +35,7 @@
 
   <mat-form-field
     *ngIf="canEditColumn('to_name')"
-    class="entity-edit-field"
+    class="entity-edit-field search"
     appearance="outline"
   >
     <mat-label>{{ 'To name' | translate }}</mat-label>
@@ -45,6 +46,9 @@
       [(ngModel)]="data.entity.to_name"
       autocomplete="off"
     />
+    <button mat-icon-button (click)="search()">
+      <mat-icon>search</mat-icon>
+    </button>
   </mat-form-field>
 
   <mat-form-field
@@ -61,6 +65,16 @@
       autocomplete="off"
     />
   </mat-form-field>
+
+  <div class="recipients" *ngIf="recipients.length > 0">
+    <div
+      *ngFor="let idx of recipients"
+      role="button"
+      (click)="recipientSelected(idx)"
+    >
+      {{ idx.contact }}
+    </div>
+  </div>
 
   <mat-form-field
     *ngIf="canEditColumn('subject')"

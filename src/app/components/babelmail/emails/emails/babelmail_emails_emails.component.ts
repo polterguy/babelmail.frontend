@@ -32,11 +32,11 @@ export class Babelmail_emails_emailsComponent
    */
   public displayedColumns: string[] = [
     'state',
-    'to_name',
     'from_name',
-    'to_email',
     'from_email',
     'subject',
+    'to_name',
+    'to_email',
     'language',
     'state',
     'direction',
@@ -174,18 +174,18 @@ export class Babelmail_emails_emailsComponent
      * Creating our filtering FormControl instances, which gives us "live filtering"
      * on our columns.
      */
-    this.to_name = this.createFormControl('emails.emails.to_name.like');
-    this.from_name = this.createFormControl('emails.emails.from_name.like');
-    this.to_email = this.createFormControl('emails.emails.to_email.like');
-    this.from_email = this.createFormControl('emails.emails.from_email.like');
-    this.subject = this.createFormControl('emails.emails.subject.like');
-    this.language = this.createFormControl('emails.emails.language.like');
-    this.state = this.createFormControl('emails.emails.state.like');
-    this.direction = this.createFormControl('emails.emails.direction.like');
-    this.id = this.createFormControl('emails.emails.id.eq');
-    this.content = this.createFormControl('emails.emails.content.eq');
-    this.created = this.createFormControl('emails.emails.created.eq');
-    this.sent = this.createFormControl('emails.emails.sent.eq');
+    this.to_name = this.createFormControl('to_name.like');
+    this.from_name = this.createFormControl('from_name.like');
+    this.to_email = this.createFormControl('to_email.like');
+    this.from_email = this.createFormControl('from_email.like');
+    this.subject = this.createFormControl('subject.like');
+    this.language = this.createFormControl('language.like');
+    this.state = this.createFormControl('state.eq');
+    this.direction = this.createFormControl('direction.like');
+    this.id = this.createFormControl('id.eq');
+    this.content = this.createFormControl('content.like');
+    this.created = this.createFormControl('created.eq');
+    this.sent = this.createFormControl('sent.eq');
   }
 
   /**

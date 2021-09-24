@@ -26,6 +26,11 @@ export class EditBabelmail_emails_emailsComponent
   public advanced: boolean = false;
 
   /**
+   * List of search recipients.
+   */
+  public recipients: any[] = [];
+
+  /**
    * Constructor taking a bunch of services injected using dependency injection.
    */
   constructor(
@@ -70,6 +75,50 @@ export class EditBabelmail_emails_emailsComponent
         this.data.entity.from_email = result.email;
       });
     }
+  }
+
+  /**
+   * Invoked when user wants to search for a contact.
+   */
+  public search() {
+    const filter = this.data.entity.to_name;
+    this.service.contacts
+      .read({
+        filter: filter + '%',
+      })
+      .subscribe((result: any[]) => {
+        // Checking we've got any results at all
+        if (result) {
+          // Checking if we only have one result, at which point we assign entity automatically.
+          if (result.length === 1) {
+            // Automatically assigning.
+            this.data.entity.to_name = result[0].name;
+            this.data.entity.to_email = result[0].email;
+            this.changed('to_name');
+            this.changed('to_email');
+          } else if (result.length > 1) {
+            // Showing list of options to allow user to select.
+            this.recipients = result;
+          }
+        } else {
+          // Displaying feedback to user.
+          this.snackBar.open('No match', null, {
+            duration: 1000,
+          });
+        }
+      });
+  }
+
+  /**
+   * Invoked when user selects a recipient.
+   *
+   * @param recipient Recipient clicked
+   */
+  public recipientSelected(recipient: any) {
+    // Assigning model.
+    this.data.entity.to_name = recipient.name;
+    this.data.entity.to_email = recipient.email;
+    this.recipients = [];
   }
 
   /**

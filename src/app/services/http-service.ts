@@ -276,6 +276,21 @@ export class HttpService {
   }
 
   /**
+   * Allows you to query your contacts.
+   */
+  get contacts() {
+    return {
+      read: (filter: any) => {
+        return this.httpClient.get<any[]>(
+          environment.apiUrl +
+            'magic/modules/babelmail/contacts/list-contacts' +
+            this.getQueryArgs(filter)
+        );
+      },
+    };
+  }
+
+  /**
    * Uploads an image to your backend.
    *
    * @param url Backend relative endpoint URL

@@ -162,18 +162,9 @@
               <label>{{ 'Filename' | translate }}</label>
               <span>{{ el['filename'] }}</span>
             </p>
-            <p class="details">
-              <label>{{ 'Id' | translate }}</label>
-              <span>{{ el['id'] }}</span>
-            </p>
-            <p class="details">
-              <label>{{ 'Email ID' | translate }}</label>
-              <span>{{ el['email_id'] }}</span>
-            </p>
-            <p class="details">
-              <label>{{ 'Path' | translate }}</label>
-              <span>{{ el['path'] }}</span>
-            </p>
+            <button mat-button class="download-button" (click)="download(el)">
+              Download
+            </button>
           </div>
         </td>
       </ng-container>

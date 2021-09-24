@@ -326,8 +326,8 @@
             class="details-sheet email-details"
             *ngIf="shouldDisplayDetails(el)"
           >
-            <div class="created" [matTooltip]="el.created | since">
-              {{ el.created | formatDate }}
+            <div class="created" [matTooltip]="el.created | formatDate">
+              {{ el.created | since }}
             </div>
             <button
               *ngIf="
