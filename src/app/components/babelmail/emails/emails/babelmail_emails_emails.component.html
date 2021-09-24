@@ -362,7 +362,7 @@
               *ngIf="
                 authService.me.canInvoke(url(), 'put') &&
                 httpService['babelmail_emails_emails']['update'] &&
-                el.state === 'draft'
+                (el.state === 'draft' || el.state === 'failed')
               "
               mat-button
               color="primary"

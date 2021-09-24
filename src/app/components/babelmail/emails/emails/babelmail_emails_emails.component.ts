@@ -108,6 +108,8 @@ export class Babelmail_emails_emailsComponent
         return 'drafts';
       case 'sent':
         return 'email';
+      case 'failed':
+        return 'warning';
     }
   }
 
@@ -164,9 +166,13 @@ export class Babelmail_emails_emailsComponent
             // Assigning model.
             result = result || [];
             for (const idx of result) {
-              // Ensuring file extension becomes correctly applied.
-              const extension = idx.path.substr(idx.path.lastIndexOf('.') + 1);
-              idx.filename += '.' + extension;
+              if (idx.filename.indexOf('.') === -1) {
+                // Ensuring file extension becomes correctly applied.
+                const extension = idx.path.substr(
+                  idx.path.lastIndexOf('.') + 1
+                );
+                idx.filename += '.' + extension;
+              }
             }
             entity.attachments = result;
           });
