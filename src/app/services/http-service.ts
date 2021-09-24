@@ -172,8 +172,16 @@ export class HttpService {
   /**
    * HTTP CRUD service methods for your 'babelmail_emails_emails' entities.
    */
-  get babelmail_emails_emails(): ICruEntity {
+  get babelmail_emails_emails(): ICrudEntity {
     return {
+      delete: (filter: any) => {
+        return this.httpClient.delete<DeleteResponse>(
+          environment.apiUrl +
+            'magic/modules/babelmail/emails/emails' +
+            this.getQueryArgs(filter)
+        );
+      },
+
       read: (filter: any) => {
         return this.httpClient.get<any[]>(
           environment.apiUrl +

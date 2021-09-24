@@ -15,6 +15,17 @@ app-magic-image-view {
 .component-wrapper {
   .grid-wrapper {
     table {
+      tr {
+        th:nth-child(1),
+        td:nth-child(1) {
+          width: 80px;
+          max-width: 80px;
+        }
+        th:nth-child(2),
+        td:nth-child(2) {
+          display: table-cell !important;
+        }
+      }
       tr.sent {
         td {
           color: rgb(128, 128, 128);
@@ -29,6 +40,26 @@ app-magic-image-view {
       .email-details {
         display: block !important;
         flex-wrap: unset !important;
+
+        .state {
+          position: absolute;
+          top: 0;
+          right: 0;
+          border-radius: 5px;
+          border-top-left-radius: 0;
+          border-bottom-right-radius: 0;
+          padding: 0.5rem;
+          width: 7rem;
+          text-align: center;
+        }
+
+        .state.draft {
+          background-color: rgb(220, 220, 220);
+        }
+
+        .state.sent {
+          background-color: rgb(128, 255, 128);
+        }
 
         .from_to {
           white-space: normal;

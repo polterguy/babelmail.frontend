@@ -159,26 +159,11 @@
       </ng-container>
 
       <ng-container matColumnDef="state">
-        <th mat-header-cell *matHeaderCellDef>
-          <mat-form-field
-            appearance="outline"
-            class="fill-width filter-textbox"
-          >
-            <mat-label>{{ 'State' | translate }}</mat-label>
-            <input
-              matInput
-              type="text"
-              autocomplete="off"
-              [formControl]="state"
-            />
-            <mat-icon matSuffix>search</mat-icon>
-          </mat-form-field>
-          <button class="sort-button" (click)="sort('state')" mat-button>
-            <mat-icon matSuffix>{{ getSortIcon('state') }}</mat-icon>
-          </button>
-        </th>
+        <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell (click)="toggleDetails(el)" *matCellDef="let el">
-          {{ el['state'] }}
+          <mat-icon [matTooltip]="el['state']">
+            {{ getStateIcon(el['state']) }}
+          </mat-icon>
         </td>
       </ng-container>
 
@@ -325,8 +310,9 @@
           "
         >
           <button
+            [disabled]="el.state !== 'draft'"
             mat-button
-            (click)="deleteEntity(el, {})"
+            (click)="deleteEntity(el, { id: el.id })"
             [matTooltip]="'Delete this record' | translate"
           >
             <mat-icon matSuffix>delete</mat-icon>
@@ -354,6 +340,10 @@
             >
               <mat-icon matSuffix>edit</mat-icon>
             </button>
+
+            <div [class]="'state ' + el.state">
+              {{ el.state }}
+            </div>
 
             <div class="from_to">
               <span class="email">

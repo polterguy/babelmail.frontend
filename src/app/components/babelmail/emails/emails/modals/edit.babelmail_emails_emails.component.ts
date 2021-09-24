@@ -35,7 +35,7 @@ export class EditBabelmail_emails_emailsComponent
     public service: HttpService
   ) {
     super(snackBar);
-    this.primaryKeys = [];
+    this.primaryKeys = ['id'];
     this.createColumns = [
       'to_name',
       'from_name',
@@ -46,13 +46,13 @@ export class EditBabelmail_emails_emailsComponent
       'send',
     ];
     this.updateColumns = [
+      'id',
       'to_name',
       'from_name',
       'to_email',
       'from_email',
       'subject',
       'content',
-      'id',
       'send',
     ];
   }
@@ -78,7 +78,10 @@ export class EditBabelmail_emails_emailsComponent
   public send() {
     this.data.entity.send = true;
     this.changed('send');
-    this.upsert();
+    this.upsert(() => {
+      this.data.entity.state = 'sent';
+      this.changed('state');
+    });
   }
 
   /**

@@ -102,7 +102,7 @@ export abstract class DialogComponent {
    * Will either create a new item or update an existing, depending upon
    * whether or not this is an edit or create operation.
    */
-  public upsert() {
+  public upsert(success: () => void = null) {
     // Sanity checking invocation, making sure user actually edited something.
     if (this.changedValues.length === 0) {
       this.snackBar.open(
@@ -142,6 +142,9 @@ export abstract class DialogComponent {
 
       this.getUpdateMethod().subscribe(
         (res: UpdateResponse) => {
+          if (success) {
+            success();
+          }
           this.close(this.getData().entity);
         },
         (error: any) => {
@@ -164,6 +167,9 @@ export abstract class DialogComponent {
 
       this.getCreateMethod().subscribe(
         (res: CreateResponse) => {
+          if (success) {
+            success();
+          }
           this.close(this.getData().entity);
         },
         (error: any) => {

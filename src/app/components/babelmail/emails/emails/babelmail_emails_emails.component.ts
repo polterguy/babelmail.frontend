@@ -32,6 +32,7 @@ export class Babelmail_emails_emailsComponent
    * Notice! 'delete-instance' should always come last.
    */
   public displayedColumns: string[] = [
+    'state',
     'to_name',
     'from_name',
     'to_email',
@@ -90,6 +91,20 @@ export class Babelmail_emails_emailsComponent
   }
 
   /**
+   * Invoked when grid needs icon to display for email.
+   *
+   * @param state State of email
+   */
+  public getStateIcon(state: string) {
+    switch (state) {
+      case 'draft':
+        return 'drafts';
+      case 'sent':
+        return 'email';
+    }
+  }
+
+  /**
    * Overridden abstract method from base class, that returns the Observable
    * necessary to actually retrieve items from backend.
    */
@@ -110,7 +125,7 @@ export class Babelmail_emails_emailsComponent
    * necessary to actually delete items in backend.
    */
   protected delete(ids: any) {
-    return throwError('No HTTP DELETE service method exists for entity');
+    return this.httpService.babelmail_emails_emails.delete(ids);
   }
 
   /**
