@@ -153,32 +153,7 @@ export class Babelmail_emails_emailsComponent
       // Showing details for specified entity.
       this.viewDetails.push(entity);
 
-      // Now we need to retrieve attachments for email, but only if we haven't retrieved these previously.
-      if (!entity.attachments) {
-        // Ensuring we don't try to retrieve attachments again before invocation towards backend is done.
-        entity.attachments = [];
-
-        // Invoking backend.
-        this.httpService.babelmail_attachments_attachments
-          .read({
-            limit: -1,
-            ['email_id.eq']: entity.id,
-          })
-          .subscribe((result: any[]) => {
-            // Assigning model.
-            result = result || [];
-            for (const idx of result) {
-              if (idx.filename.indexOf('.') === -1) {
-                // Ensuring file extension becomes correctly applied.
-                const extension = idx.path.substr(
-                  idx.path.lastIndexOf('.') + 1
-                );
-                idx.filename += '.' + extension;
-              }
-            }
-            entity.attachments = result;
-          });
-      }
+      this.getAttachments(entity);
     } else {
       // Hiding details for specified entity.
       this.viewDetails.splice(indexOf, 1);
@@ -306,6 +281,7 @@ export class Babelmail_emails_emailsComponent
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
         this.setEditData(res, entity);
+        this.getAttachments(entity, true);
       }
     });
   }
@@ -328,5 +304,32 @@ export class Babelmail_emails_emailsComponent
         this.itemCreated(res);
       }
     });
+  }
+
+  private getAttachments(entity: any, force: boolean = false) {
+    // Now we need to retrieve attachments for email, but only if we haven't retrieved these previously.
+    if (force || !entity.attachments) {
+      // Ensuring we don't try to retrieve attachments again before invocation towards backend is done.
+      entity.attachments = [];
+
+      // Invoking backend.
+      this.httpService.babelmail_attachments_attachments
+        .read({
+          limit: -1,
+          ['email_id.eq']: entity.id,
+        })
+        .subscribe((result: any[]) => {
+          // Assigning model.
+          result = result || [];
+          for (const idx of result) {
+            if (idx.filename.indexOf('.') === -1) {
+              // Ensuring file extension becomes correctly applied.
+              const extension = idx.path.substr(idx.path.lastIndexOf('.') + 1);
+              idx.filename += '.' + extension;
+            }
+          }
+          entity.attachments = result;
+        });
+    }
   }
 }

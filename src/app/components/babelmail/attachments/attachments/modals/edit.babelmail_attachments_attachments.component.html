@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>
-  {{ (data.isEdit ? 'Edit' : 'Create') | translate }}
-  {{ 'Attachments' | translate }}
+  {{ (data.isEdit ? 'Edit' : 'Add') | translate }}
+  {{ 'attachment' | translate }}
 </h1>
 <div mat-dialog-content>
   <app-magic-file
@@ -8,7 +8,7 @@
     [model]="data.entity"
     field="path"
     [placeholder]="'File' | translate"
-    class="entity-edit-field"
+    class="entity-edit-field-wide"
     uploadUrl="/babelmail/files/upload-file"
     (change)="changed('path')"
   >
@@ -16,7 +16,7 @@
 
   <mat-form-field
     *ngIf="canEditColumn('filename')"
-    class="entity-edit-field"
+    class="entity-edit-field-wide"
     appearance="outline"
   >
     <mat-label>{{ 'Filename' | translate }}</mat-label>

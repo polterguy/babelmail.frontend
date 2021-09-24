@@ -34,7 +34,6 @@ export class Babelmail_attachments_attachmentsComponent
   public displayedColumns: string[] = [
     'filename',
     'email_id',
-    'path',
     'delete-instance',
   ];
 
@@ -78,10 +77,15 @@ export class Babelmail_attachments_attachmentsComponent
    * @param el File to download
    */
   public download(el: any) {
+    const splits = el.path.split('.');
     window.location.href =
       environment.apiUrl +
       'magic/modules/babelmail/files/download-file?file=' +
-      encodeURIComponent(el.path);
+      encodeURIComponent(el.path) +
+      '&filename=' +
+      el.filename +
+      '.' +
+      splits[splits.length - 1];
   }
 
   /**

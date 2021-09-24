@@ -175,7 +175,7 @@ export class EditBabelmail_emails_emailsComponent
     this.upsert(() => {
       this.data.entity.state = 'sent';
       this.changed('state');
-    });
+    }, true);
   }
 
   /**
@@ -193,7 +193,6 @@ export class EditBabelmail_emails_emailsComponent
         // Removing attachment from list of attachments.
         this.attachments.splice(this.attachments.indexOf(att), 1);
       });
-    console.log(att);
   }
 
   /**
@@ -252,7 +251,7 @@ export class EditBabelmail_emails_emailsComponent
     );
     dialogRef.afterClosed().subscribe((res: any) => {
       if (res) {
-        console.log('successs');
+        this.getAttachments();
       }
     });
   }

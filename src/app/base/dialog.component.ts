@@ -102,7 +102,7 @@ export abstract class DialogComponent {
    * Will either create a new item or update an existing, depending upon
    * whether or not this is an edit or create operation.
    */
-  public upsert(success: () => void = null) {
+  public upsert(success: () => void = null, forceReload: boolean = false) {
     // Sanity checking invocation, making sure user actually edited something.
     if (this.changedValues.length === 0) {
       this.snackBar.open(
@@ -115,7 +115,7 @@ export abstract class DialogComponent {
           panelClass: ['error-snackbar'],
         }
       );
-      this.close(null);
+      this.close(forceReload ? this.getData() : null);
       return;
     }
 
