@@ -353,7 +353,7 @@ export abstract class GridComponent {
    *
    * @param entity Entity to toggle details view for
    */
-  public toggleDetails(entity: any) {
+  public toggleDetails(entity: any): void {
     const indexOf = this.viewDetails.indexOf(entity);
     if (indexOf === -1) {
       this.viewDetails.push(entity);

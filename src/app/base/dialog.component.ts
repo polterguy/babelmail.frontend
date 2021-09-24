@@ -90,7 +90,7 @@ export abstract class DialogComponent {
    *
    * @param field Name of field that was edited
    */
-  public changed(field: string) {
+  public changed(field: string): void {
     if (this.changedValues.filter((x) => x == field).length === 0) {
       this.changedValues.push(field);
     }

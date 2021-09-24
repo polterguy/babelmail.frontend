@@ -78,6 +78,13 @@ export class EditBabelmail_emails_emailsComponent
   }
 
   /**
+   *
+   */
+  public clearRecipients() {
+    this.recipients = [];
+  }
+
+  /**
    * Invoked when user wants to search for a contact.
    */
   public search() {

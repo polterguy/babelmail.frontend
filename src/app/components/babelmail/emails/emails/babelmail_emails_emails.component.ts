@@ -12,6 +12,7 @@ import { FormControl } from '@angular/forms';
 import { EditBabelmail_emails_emailsComponent } from './modals/edit.babelmail_emails_emails.component';
 import { HttpService } from 'src/app/services/http-service';
 import { AuthService } from 'src/app/services/auth-service';
+import { environment } from '@env/environment';
 
 /**
  * "Datagrid" component for displaying instance of Emails
@@ -49,6 +50,11 @@ export class Babelmail_emails_emailsComponent
 
   // Need to view paginator as a child to update page index of it.
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+
+  /**
+   * How to filter emails.
+   */
+  public filterType: string = 'no-filter';
 
   // Form control declarations to bind up with reactive form elements.
   public to_name: FormControl;
@@ -103,6 +109,87 @@ export class Babelmail_emails_emailsComponent
       case 'sent':
         return 'email';
     }
+  }
+
+  /**
+   * Invoked when filter is changed.
+   */
+  public filterChanged() {
+    // Figuring out how to filter emails.
+    switch (this.filterType) {
+      case 'sent':
+        this.filter['state.eq'] = 'sent';
+        break;
+
+      case 'draft':
+        this.filter['state.eq'] = 'draft';
+        break;
+
+      case 'received':
+        this.filter['state.eq'] = 'received';
+        break;
+
+      default:
+        delete this.filter['state.eq'];
+        break;
+    }
+
+    // Retrieving items, now filtered.
+    this.getData(true);
+  }
+
+  /**
+   * Invoked when user is toggling details for viewing email's details.
+   *
+   * @param entity Entity we're toggling
+   */
+  public toggleDetails(entity: any): void {
+    const indexOf = this.viewDetails.indexOf(entity);
+    if (indexOf === -1) {
+      // Showing details for specified entity.
+      this.viewDetails.push(entity);
+
+      // Now we need to retrieve attachments for email, but only if we haven't retrieved these previously.
+      if (!entity.attachments) {
+        // Ensuring we don't try to retrieve attachments again before invocation towards backend is done.
+        entity.attachments = [];
+
+        // Invoking backend.
+        this.httpService.babelmail_attachments_attachments
+          .read({
+            limit: -1,
+            ['email_id.eq']: entity.id,
+          })
+          .subscribe((result: any[]) => {
+            // Assigning model.
+            result = result || [];
+            for (const idx of result) {
+              // Ensuring file extension becomes correctly applied.
+              const extension = idx.path.substr(idx.path.lastIndexOf('.') + 1);
+              idx.filename += '.' + extension;
+            }
+            entity.attachments = result;
+          });
+      }
+    } else {
+      // Hiding details for specified entity.
+      this.viewDetails.splice(indexOf, 1);
+    }
+  }
+
+  /**
+   * Invoked when an attachment is to be downloaded.
+   *
+   * @param attachment Attachment to download
+   */
+  public downloadAttachment(attachment: any) {
+    // Downloading file to client.
+    window.location.href =
+      environment.apiUrl +
+      'magic/modules/babelmail/files/download-file?file=' +
+      encodeURIComponent(attachment.path) +
+      '&filename=' +
+      encodeURIComponent(attachment.filename);
   }
 
   /**

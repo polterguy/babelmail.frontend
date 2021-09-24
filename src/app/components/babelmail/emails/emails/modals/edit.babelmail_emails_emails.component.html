@@ -43,6 +43,7 @@
       matInput
       type="text"
       (change)="changed('to_name')"
+      (keypress)="clearRecipients()"
       [(ngModel)]="data.entity.to_name"
       autocomplete="off"
     />

@@ -100,9 +100,36 @@ app-magic-image-view {
         .content {
           white-space: normal;
           margin-top: 0.5rem;
-          margin-bottom: 3rem;
+          margin-bottom: 2rem;
+        }
+
+        mat-chip-list {
+          display: block;
+          margin-bottom: 2rem;
+          margin-left: -1rem;
+          margin-right: -1rem;
+          mat-chip {
+            cursor: pointer;
+          }
         }
       }
     }
+  }
+}
+
+.top-toolbar {
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  .filter-email-types {
+    font-size: 10px;
+    width: 8rem;
+  }
+
+  .create-button {
+    position: relative !important;
+    top: unset;
+    right: unset;
   }
 }

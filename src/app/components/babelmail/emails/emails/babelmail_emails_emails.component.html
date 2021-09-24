@@ -1,17 +1,31 @@
 <div class="component-wrapper">
   <div class="mat-elevation-z4 relativized grid-wrapper">
-    <button
-      mat-raised-button
-      *ngIf="
-        authService.me.canInvoke(url(), 'post') &&
-        httpService['babelmail_emails_emails']['create']
-      "
-      class="create-button"
-      [matTooltip]="('Create' | translate) + (' Emails' | translate)"
-      (click)="createEntity()"
-    >
-      <mat-icon>add_circle</mat-icon>
-    </button>
+    <div class="top-toolbar">
+      <mat-form-field appearance="outline" class="filter-email-types">
+        <mat-select
+          [(ngModel)]="filterType"
+          (selectionChange)="filterChanged()"
+        >
+          <mat-option value="no-filter">No filter ...</mat-option>
+          <mat-option value="received">Inbox</mat-option>
+          <mat-option value="sent">Sent</mat-option>
+          <mat-option value="draft">Drafts</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        *ngIf="
+          authService.me.canInvoke(url(), 'post') &&
+          httpService['babelmail_emails_emails']['create']
+        "
+        class="create-button"
+        [matTooltip]="('Create' | translate) + (' email' | translate)"
+        (click)="createEntity()"
+      >
+        <mat-icon>add_circle</mat-icon>
+      </button>
+    </div>
 
     <table mat-table multiTemplateDataRows [dataSource]="data">
       <ng-container matColumnDef="to_name">
@@ -385,6 +399,16 @@
             <div class="content">
               {{ el.content }}
             </div>
+
+            <mat-chip-list *ngIf="el.attachments && el.attachments.length > 0">
+              <mat-chip
+                *ngFor="let idx of el.attachments"
+                matTooltip="Download attachment to local computer"
+                (click)="downloadAttachment(idx)"
+              >
+                {{ idx.filename }}
+              </mat-chip>
+            </mat-chip-list>
           </div>
         </td>
       </ng-container>
