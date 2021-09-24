@@ -149,6 +149,17 @@ export class Babelmail_emails_emailsComponent
   }
 
   /**
+   * Returns CSS class name for a specific table row (tr element).
+   * Notice, the CSS class is changed according to whether or not the details
+   * window is visible or not.
+   *
+   * @param entity Entity to retrieve view-details CSS class for
+   */
+  public getClassForRecord(entity: any): string {
+    return super.getClassForRecord(entity) + ' ' + entity.state;
+  }
+
+  /**
    * Invoked when user wants to edit an entity
    *
    * This will show a modal dialog, allowing the user to edit his record.

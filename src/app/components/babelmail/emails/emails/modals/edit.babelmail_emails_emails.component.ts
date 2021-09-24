@@ -43,9 +43,7 @@ export class EditBabelmail_emails_emailsComponent
       'from_email',
       'subject',
       'content',
-      'language',
       'send',
-      'html',
     ];
     this.updateColumns = [
       'to_name',
@@ -54,10 +52,8 @@ export class EditBabelmail_emails_emailsComponent
       'from_email',
       'subject',
       'content',
-      'language',
       'id',
       'send',
-      'html',
     ];
   }
 
@@ -74,6 +70,15 @@ export class EditBabelmail_emails_emailsComponent
         this.data.entity.from_email = result.email;
       });
     }
+  }
+
+  /**
+   * Invoked when user wants to send email immediately.
+   */
+  public send() {
+    this.data.entity.send = true;
+    this.changed('send');
+    this.upsert();
   }
 
   /**

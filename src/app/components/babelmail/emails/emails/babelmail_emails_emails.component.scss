@@ -12,33 +12,50 @@ app-magic-image-view {
   width: 100%;
 }
 
-.email-details {
-  display: block !important;
-  flex-wrap: unset !important;
+.component-wrapper {
+  .grid-wrapper {
+    table {
+      tr.sent {
+        td {
+          color: rgb(128, 128, 128);
+          font-style: italic;
+        }
+      }
+      tr.draft {
+        td {
+          color: rgb(128, 128, 128);
+        }
+      }
+      .email-details {
+        display: block !important;
+        flex-wrap: unset !important;
 
-  .from_to {
-    white-space: normal;
-    margin-top: 1rem;
+        .from_to {
+          white-space: normal;
+          margin-top: 1rem;
 
-    .email {
-      display: block;
-      margin-top: 0.5rem;
-      a {
-        text-decoration: none;
-        margin-right: 1rem;
+          .email {
+            display: block;
+            margin-top: 0.5rem;
+            a {
+              text-decoration: none;
+              margin-right: 1rem;
+            }
+          }
+        }
+
+        .subject {
+          white-space: normal;
+          margin-top: 1.5rem;
+          font-weight: bold;
+        }
+
+        .content {
+          white-space: normal;
+          margin-top: 0.5rem;
+          margin-bottom: 2rem;
+        }
       }
     }
-  }
-
-  .subject {
-    white-space: normal;
-    margin-top: 1.5rem;
-    font-weight: bold;
-  }
-
-  .content {
-    white-space: normal;
-    margin-top: 0.5rem;
-    margin-bottom: 2rem;
   }
 }

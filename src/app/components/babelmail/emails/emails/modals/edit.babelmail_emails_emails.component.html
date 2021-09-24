@@ -124,14 +124,6 @@
   </mat-form-field>
 
   <mat-checkbox
-    *ngIf="canEditColumn('send') && advanced"
-    class="entity-edit-field"
-    (change)="changed('send')"
-    [(ngModel)]="data.entity.send"
-    >send</mat-checkbox
-  >
-
-  <mat-checkbox
     *ngIf="canEditColumn('html') && advanced"
     class="entity-edit-field"
     (change)="changed('html')"
@@ -146,14 +138,27 @@
       >Advanced</mat-slide-toggle
     >
     <button
-      [matTooltip]="'Saves email as a draft' | translate"
-      mat-raised-button
+      [matTooltip]="'Send email' | translate"
       color="primary"
+      mat-raised-button
+      (click)="send()"
+    >
+      {{ 'Send' | translate }}
+    </button>
+    <button
+      [matTooltip]="'Saves email as a draft' | translate"
+      mat-button
       (click)="upsert()"
     >
       {{ 'Save' | translate }}
     </button>
 
-    <button mat-button (click)="close(null)">{{ 'Cancel' | translate }}</button>
+    <button
+      mat-button
+      [matTooltip]="'Discard email' | translate"
+      (click)="close(null)"
+    >
+      {{ 'Cancel' | translate }}
+    </button>
   </div>
 </div>

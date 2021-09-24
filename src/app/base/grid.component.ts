@@ -311,7 +311,7 @@ export abstract class GridComponent {
    *
    * @param entity Entity to retrieve view-details CSS class for
    */
-  public getClassForRecord(entity: any) {
+  public getClassForRecord(entity: any): string {
     if (this.viewDetails.indexOf(entity) !== -1) {
       return 'grid-row visible-details';
     }
