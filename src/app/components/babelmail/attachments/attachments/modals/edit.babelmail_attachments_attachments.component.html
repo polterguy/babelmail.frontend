@@ -8,7 +8,7 @@
     class="entity-edit-field"
     appearance="outline"
   >
-    <mat-label>{{ 'filename' | translate }}</mat-label>
+    <mat-label>{{ 'Filename' | translate }}</mat-label>
     <input
       matInput
       type="text"
@@ -18,27 +18,23 @@
     />
   </mat-form-field>
 
-  <mat-form-field
+  <app-magic-file
     *ngIf="canEditColumn('path')"
+    [model]="data.entity"
+    field="path"
+    [placeholder]="'File' | translate"
     class="entity-edit-field"
-    appearance="outline"
+    uploadUrl="/babelmail/files/upload-file"
+    (change)="changed('path')"
   >
-    <mat-label>{{ 'path' | translate }}</mat-label>
-    <input
-      matInput
-      type="text"
-      (change)="changed('path')"
-      [(ngModel)]="data.entity.path"
-      autocomplete="off"
-    />
-  </mat-form-field>
+  </app-magic-file>
 
   <mat-form-field
     *ngIf="canEditColumn('email_id')"
     class="entity-edit-field"
     appearance="outline"
   >
-    <mat-label>{{ 'email_id' | translate }}</mat-label>
+    <mat-label>{{ 'Email ID' | translate }}</mat-label>
     <input
       matInput
       type="number"
