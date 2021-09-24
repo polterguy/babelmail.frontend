@@ -41,6 +41,22 @@ app-magic-image-view {
         display: block !important;
         flex-wrap: unset !important;
 
+        // Edit details button.
+        .send-button {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          padding-right: 0;
+        }
+
+        .created {
+          position: absolute;
+          top: 0.5rem;
+          left: 1rem;
+          font-style: italic;
+          color: rgb(128, 128, 128);
+        }
+
         .state {
           position: absolute;
           top: 0;
@@ -63,7 +79,7 @@ app-magic-image-view {
 
         .from_to {
           white-space: normal;
-          margin-top: 1rem;
+          margin-top: 3rem;
 
           .email {
             display: block;
@@ -84,7 +100,7 @@ app-magic-image-view {
         .content {
           white-space: normal;
           margin-top: 0.5rem;
-          margin-bottom: 2rem;
+          margin-bottom: 3rem;
         }
       }
     }

@@ -326,6 +326,24 @@
             class="details-sheet email-details"
             *ngIf="shouldDisplayDetails(el)"
           >
+            <div class="created" [matTooltip]="el.created | since">
+              {{ el.created | formatDate }}
+            </div>
+            <button
+              *ngIf="
+                authService.me.canInvoke(url(), 'put') &&
+                httpService['babelmail_emails_emails']['update'] &&
+                el.state === 'draft'
+              "
+              mat-button
+              color="primary"
+              class="send-button"
+              [matTooltip]="'Edit' | translate"
+              (click)="editEntity(el)"
+            >
+              <mat-icon matSuffix>edit</mat-icon>
+            </button>
+
             <button
               *ngIf="
                 authService.me.canInvoke(url(), 'put') &&
@@ -335,10 +353,10 @@
               mat-button
               color="primary"
               class="edit-button"
-              [matTooltip]="'Edit' | translate"
-              (click)="editEntity(el)"
+              [matTooltip]="'Send' | translate"
+              (click)="sendEmail(el)"
             >
-              <mat-icon matSuffix>edit</mat-icon>
+              <mat-icon matSuffix>send</mat-icon>
             </button>
 
             <div [class]="'state ' + el.state">
