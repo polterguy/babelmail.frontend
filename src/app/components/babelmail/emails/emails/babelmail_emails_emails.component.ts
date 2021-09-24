@@ -106,8 +106,10 @@ export class Babelmail_emails_emailsComponent
     switch (state) {
       case 'draft':
         return 'drafts';
+
       case 'sent':
         return 'email';
+
       case 'failed':
         return 'warning';
     }

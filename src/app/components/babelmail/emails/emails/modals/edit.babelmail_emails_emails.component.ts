@@ -4,9 +4,14 @@
 
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogRef,
+  MatDialog,
+} from '@angular/material/dialog';
 import { HttpService } from 'src/app/services/http-service';
 import { DialogComponent, DialogData } from '@app/base/dialog.component';
+import { EditBabelmail_attachments_attachmentsComponent } from '@app/components/babelmail/attachments/attachments/modals/edit.babelmail_attachments_attachments.component';
 
 /**
  * Modal dialog for editing your existing Emails entity types, and/or
@@ -31,13 +36,19 @@ export class EditBabelmail_emails_emailsComponent
   public recipients: any[] = [];
 
   /**
+   * Attachments associated with email.
+   */
+  public attachments: any[] = [];
+
+  /**
    * Constructor taking a bunch of services injected using dependency injection.
    */
   constructor(
     public dialogRef: MatDialogRef<EditBabelmail_emails_emailsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     protected snackBar: MatSnackBar,
-    public service: HttpService
+    public service: HttpService,
+    protected dialog: MatDialog
   ) {
     super(snackBar);
     this.primaryKeys = ['id'];
@@ -75,6 +86,11 @@ export class EditBabelmail_emails_emailsComponent
         this.data.entity.from_email = result.email;
       });
     }
+
+    // Retrieving attachments, but only if we're editing email.
+    if (this.data.isEdit) {
+      this.getAttachments();
+    }
   }
 
   /**
@@ -82,6 +98,28 @@ export class EditBabelmail_emails_emailsComponent
    */
   public clearRecipients() {
     this.recipients = [];
+  }
+
+  /**
+   * Invoked when user wants to assciate an attachment with email.
+   */
+  public addAttachment() {
+    // In case email has not yet been saved, we need to save it.
+    if (!this.data.entity.id) {
+      // Saving email to make sure we can associate an attachment with an existing email.
+      this.service.babelmail_emails_emails
+        .create(this.data.entity)
+        .subscribe((result: any) => {
+          // Making sure we change state of entity to "edit mode".
+          this.data.isEdit = true;
+          this.data.entity.id = result.id;
+          this.changed('id');
+          this.uploadAttachment();
+        });
+    } else {
+      // Email is being edited, hence we can upload attachment immediately.
+      this.uploadAttachment();
+    }
   }
 
   /**
@@ -141,6 +179,24 @@ export class EditBabelmail_emails_emailsComponent
   }
 
   /**
+   * Invoked when an attachment should be removed.
+   *
+   * @param att Attachment to remove
+   */
+  public removeAttachment(att: any) {
+    // Deleting attachment by invoking backend.
+    this.service.babelmail_attachments_attachments
+      .delete({
+        id: att.id,
+      })
+      .subscribe((result: any) => {
+        // Removing attachment from list of attachments.
+        this.attachments.splice(this.attachments.indexOf(att), 1);
+      });
+    console.log(att);
+  }
+
+  /**
    * Returns a reference to ths DialogData that was dependency injected
    * into component during creation.
    */
@@ -172,5 +228,48 @@ export class EditBabelmail_emails_emailsComponent
     } else {
       this.dialogRef.close();
     }
+  }
+
+  /*
+   * Private helper methods.
+   */
+
+  /*
+   * Invoked when user wants to associate an attachment with email.
+   */
+  private uploadAttachment() {
+    const dialogRef = this.dialog.open(
+      EditBabelmail_attachments_attachmentsComponent,
+      {
+        data: {
+          isEdit: false,
+          entity: {
+            email_id: this.data.entity.id,
+          },
+          locked: true,
+        },
+      }
+    );
+    dialogRef.afterClosed().subscribe((res: any) => {
+      if (res) {
+        console.log('successs');
+      }
+    });
+  }
+
+  /*
+   * Retrieves attachments associated with email.
+   */
+  private getAttachments() {
+    // Invoking backend.
+    this.service.babelmail_attachments_attachments
+      .read({
+        limit: -1,
+        ['email_id.eq']: this.data.entity.id,
+      })
+      .subscribe((result: any[]) => {
+        // Assigning model.
+        this.attachments = result;
+      });
   }
 }

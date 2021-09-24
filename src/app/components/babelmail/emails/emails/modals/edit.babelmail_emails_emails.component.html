@@ -107,6 +107,17 @@
     ></textarea>
   </mat-form-field>
 
+  <mat-chip-list *ngIf="attachments && attachments.length > 0">
+    <mat-chip
+      *ngFor="let idx of attachments"
+      removable="true"
+      (removed)="removeAttachment(idx)"
+    >
+      {{ idx.filename }}
+      <mat-icon matChipRemove>cancel</mat-icon>
+    </mat-chip>
+  </mat-chip-list>
+
   <mat-form-field
     *ngIf="canEditColumn('language') && advanced"
     class="entity-edit-field"
@@ -155,25 +166,32 @@
     <button
       [matTooltip]="'Send email' | translate"
       color="primary"
-      mat-raised-button
+      mat-icon-button
       (click)="send()"
     >
-      {{ 'Send' | translate }}
+      <mat-icon>send</mat-icon>
+    </button>
+    <button
+      [matTooltip]="'Add attachment' | translate"
+      mat-icon-button
+      (click)="addAttachment()"
+    >
+      <mat-icon>cloud_upload</mat-icon>
     </button>
     <button
       [matTooltip]="'Saves email as a draft' | translate"
-      mat-button
+      mat-icon-button
       (click)="upsert()"
     >
-      {{ 'Save' | translate }}
+      <mat-icon>save</mat-icon>
     </button>
 
     <button
-      mat-button
-      [matTooltip]="'Discard email' | translate"
+      mat-icon-button
+      [matTooltip]="'Discard changes' | translate"
       (click)="close(null)"
     >
-      {{ 'Cancel' | translate }}
+      <mat-icon>cancel</mat-icon>
     </button>
   </div>
 </div>

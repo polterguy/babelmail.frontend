@@ -1,5 +1,15 @@
-mat-slide-toggle {
-  margin-right: 0.5rem;
+@media screen and (max-width: 500px) {
+  mat-slide-toggle {
+    display: block;
+  }
+}
+.right-aligned {
+  mat-slide-toggle {
+    margin-right: 0.5rem;
+  }
+  button {
+    margin-left: 0;
+  }
 }
 
 .entity-edit-field.search {
