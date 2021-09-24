@@ -59,12 +59,15 @@ export class EditBabelmail_emails_emailsComponent
    * Implementation of OnInit.
    */
   public ngOnInit() {
-    // Invoking backend to retrieve default from email/name.
-    this.service.settings.default_from().subscribe((result: any) => {
-      // Assigning model.
-      this.data.entity.from_name = result.name;
-      this.data.entity.from_email = result.email;
-    });
+    // Checking that this is create.
+    if (!this.data.isEdit) {
+      // Invoking backend to retrieve default from email/name.
+      this.service.settings.default_from().subscribe((result: any) => {
+        // Assigning model.
+        this.data.entity.from_name = result.name;
+        this.data.entity.from_email = result.email;
+      });
+    }
   }
 
   /**
