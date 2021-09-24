@@ -14,11 +14,17 @@ import { DialogComponent, DialogData } from '@app/base/dialog.component';
  */
 @Component({
   templateUrl: './edit.babelmail_emails_emails.component.html',
+  styleUrls: ['./edit.babelmail_emails_emails.component.scss'],
 })
 export class EditBabelmail_emails_emailsComponent
   extends DialogComponent
   implements OnInit
 {
+  /**
+   * If true, allows user to override "advanced" settings for email.
+   */
+  public advanced: boolean = false;
+
   /**
    * Constructor taking a bunch of services injected using dependency injection.
    */

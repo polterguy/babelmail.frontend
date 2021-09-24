@@ -3,7 +3,7 @@
 </h1>
 <div mat-dialog-content>
   <mat-form-field
-    *ngIf="canEditColumn('from_name')"
+    *ngIf="canEditColumn('from_name') && advanced"
     class="entity-edit-field"
     appearance="outline"
   >
@@ -18,7 +18,7 @@
   </mat-form-field>
 
   <mat-form-field
-    *ngIf="canEditColumn('from_email')"
+    *ngIf="canEditColumn('from_email') && advanced"
     class="entity-edit-field"
     appearance="outline"
   >
@@ -85,7 +85,7 @@
     <mat-label>{{ 'Content' | translate }}</mat-label>
     <textarea
       matInput
-      rows="5"
+      rows="10"
       (change)="changed('content')"
       [(ngModel)]="data.entity.content"
       autocomplete="off"
@@ -93,7 +93,7 @@
   </mat-form-field>
 
   <mat-form-field
-    *ngIf="canEditColumn('language')"
+    *ngIf="canEditColumn('language') && advanced"
     class="entity-edit-field"
     appearance="outline"
   >
@@ -124,7 +124,7 @@
   </mat-form-field>
 
   <mat-checkbox
-    *ngIf="canEditColumn('send')"
+    *ngIf="canEditColumn('send') && advanced"
     class="entity-edit-field"
     (change)="changed('send')"
     [(ngModel)]="data.entity.send"
@@ -132,7 +132,7 @@
   >
 
   <mat-checkbox
-    *ngIf="canEditColumn('html')"
+    *ngIf="canEditColumn('html') && advanced"
     class="entity-edit-field"
     (change)="changed('html')"
     [(ngModel)]="data.entity.html"
@@ -142,7 +142,15 @@
 
 <div mat-dialog-actions>
   <div class="right-aligned">
-    <button mat-raised-button color="primary" (click)="upsert()">
+    <mat-slide-toggle labelPosition="before" [(ngModel)]="advanced"
+      >Advanced</mat-slide-toggle
+    >
+    <button
+      [matTooltip]="'Saves email as a draft' | translate"
+      mat-raised-button
+      color="primary"
+      (click)="upsert()"
+    >
       {{ 'Save' | translate }}
     </button>
 
